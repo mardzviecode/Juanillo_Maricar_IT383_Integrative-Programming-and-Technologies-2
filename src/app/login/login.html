@@ -1,0 +1,76 @@
+<div class="body">
+  <div class="login-card">
+    <div class="logo-row">
+      <div class="logo-badge">
+        <img src="/cat.png" alt="App logo" class="logo-image" />
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Login Portal</span>
+        <span class="logo-tagline">Secure access area</span>
+      </div>
+    </div>
+
+    <h1 class="title">Welcome back</h1>
+    <p class="subtitle">Use your account credentials to sign in.</p>
+
+    <form (ngSubmit)="submit()" #loginForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Enter your username"
+          class="text-input"
+          [(ngModel)]="username"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="••••••••"
+          class="text-input"
+          [(ngModel)]="password"
+          required
+        />
+        <p class="field-hint">Use at least 8 characters, including a number.</p>
+      </div>
+
+      <div class="form-row">
+        <label class="checkbox-label">
+          <input type="checkbox" />
+          <span>Remember me</span>
+        </label>
+        <a class="link" href="#">Forgot password?</a>
+      </div>
+
+      <button class="primary-button" type="submit" [disabled]="loginForm.invalid">
+        Sign in
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>Or continue with</span>
+    </div>
+
+    <div class="social-buttons">
+      <button type="button" class="social-button social-google">
+        <span class="social-icon">G</span>
+        <span>Google</span>
+      </button>
+      <button type="button" class="social-button social-microsoft">
+        <span class="social-icon">M</span>
+        <span>Microsoft</span>
+      </button>
+    </div>
+
+    <p class="result error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+  </div>
+</div>
