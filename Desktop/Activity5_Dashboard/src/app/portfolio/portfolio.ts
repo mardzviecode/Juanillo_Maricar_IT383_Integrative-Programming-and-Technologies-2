@@ -3,20 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-portfolio',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  templateUrl: './portfolio.html',
+  styleUrl: './portfolio.css'
 })
-export class DashboardComponent {
+export class PortfolioComponent {
   constructor(private router: Router) {}
 
-  goToProfile() {
-    this.router.navigate(['/portfolio']);
-  }
-
-  logout() {
-    this.router.navigate(['/']);
+  goBack() {
+    this.router.navigate(['/dashboard']);
   }
 }

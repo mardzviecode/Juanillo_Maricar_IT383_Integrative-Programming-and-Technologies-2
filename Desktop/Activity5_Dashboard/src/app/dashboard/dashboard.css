@@ -97,6 +97,37 @@
   transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(253, 164, 175, 0.5);
+  background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+  color: #9f1239;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(248, 113, 113, 0.2);
+  border-color: rgba(249, 168, 212, 0.6);
+}
+
+.profile-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
 .logout-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(248, 113, 113, 0.2);
