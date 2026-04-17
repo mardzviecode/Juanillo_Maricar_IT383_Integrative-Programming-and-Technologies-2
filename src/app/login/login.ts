@@ -67,6 +67,13 @@ export class LoginComponent {
 
       if (isStudent || isInstructor) {
         this.loginMessage = 'Login successful!';
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify({
+            username: (username ?? '').trim(),
+            email: (email ?? '').trim().toLowerCase()
+          })
+        );
         this.router.navigate(['/dashboard']);
       } else {
         this.loginMessage = 'Invalid login credentials.';

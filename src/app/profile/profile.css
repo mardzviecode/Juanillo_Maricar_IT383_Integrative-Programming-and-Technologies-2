@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.profile-page {
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f3d6e7;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333333;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 164, 175, 0.5);
+  background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+  color: #9f1239;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-main {
+  width: 100%;
+  min-height: calc(100vh - 74px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.profile-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  border: 4px solid;
+  border-image: linear-gradient(to right, pink, violet) 1;
+}
+
+.profile-container h2 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+
+.profile-container img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.blank-profile-frame {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  border: 2px dashed #d4a1be;
+  background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+}
+
+.profile-info {
+  font-size: 1.1rem;
+  color: #242424;
+  margin-bottom: 0.75rem;
+}
+
+.profile-info strong {
+  color: #b00c5b;
+}
+
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-container {
+    padding: 1.5rem 2rem;
+  }
+
+  .profile-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .profile-info {
+    font-size: 1rem;
+  }
+
+  .profile-container img,
+  .blank-profile-frame {
+    width: 150px;
+    height: 150px;
+  }
+}

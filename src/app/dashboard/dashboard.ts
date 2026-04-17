@@ -12,7 +12,12 @@ import { Router } from '@angular/router';
 export class DashboardComponent {
   constructor(private router: Router) {}
 
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
   logout() {
+    localStorage.removeItem('currentUser');
     this.router.navigate(['/']);
   }
 }
