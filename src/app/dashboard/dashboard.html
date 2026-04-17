@@ -1,0 +1,125 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <div class="logo-badge">
+        <img src="/cat.png" alt="Cat Shop logo" class="logo-image" />
+      </div>
+      <div>
+        <h1 class="dashboard-title">Whisker Wonderland Cat Shop</h1>
+        <p class="dashboard-greeting">Everything for your furry friend</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="cart-summary" aria-live="polite">
+        <span class="cart-summary-label">Cart</span>
+        <span class="cart-summary-count">{{ cartItemCount }}</span>
+        <span class="cart-summary-total" *ngIf="cartItemCount">{{ formatPeso(cartTotal) }}</span>
+      </div>
+      <button type="button" class="logout-btn" (click)="logout()">Log out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-view-switch" aria-label="Dashboard sections">
+      <button
+        type="button"
+        class="view-btn"
+        [class.active]="activeView === 'shop'"
+        (click)="showShopView()"
+      >
+        Shop
+      </button>
+      <button
+        type="button"
+        class="view-btn"
+        [class.active]="activeView === 'profile'"
+        (click)="showProfileView()"
+      >
+        Profile
+      </button>
+    </section>
+
+    <section class="profile-page" *ngIf="activeView === 'profile'">
+      <div class="profile-card" *ngIf="isMaricar; else genericProfile">
+        <h2 class="profile-title">My Personal Info</h2>
+        <img src="/maricarprofile.jpg" alt="maricar" class="profile-image" />
+        <p class="profile-info"><strong>Maricar G. Juanillo</strong></p>
+        <p class="profile-info"><strong>ID number:</strong> 2023-38120</p>
+        <p class="profile-info"><strong>Age:</strong>20</p>
+        <p class="profile-info"><strong>Email:</strong>maricar.juanillo&#64;evsu.edu.ph</p>
+        <p class="profile-info"><strong>Live in:</strong> Brgy. Fatima Dulag, Leyte</p>
+        <p class="profile-info"><strong>College:</strong> EVSU-Dulag Campus</p>
+        <p class="profile-info"><strong>Program/Year:</strong> BSIT-3A</p>
+        <p class="profile-info"><strong>Hobbies:</strong>Reading Books</p>
+      </div>
+
+      <ng-template #genericProfile>
+        <div class="profile-card">
+          <h2 class="profile-title">Profile</h2>
+          <p class="profile-info"><strong>Name:</strong> {{ displayName }}</p>
+          <p class="profile-info"><strong>Email:</strong> {{ currentUser?.email || 'N/A' }}</p>
+          <p class="profile-info"><strong>Role:</strong> {{ currentUser?.role || 'N/A' }}</p>
+        </div>
+      </ng-template>
+    </section>
+
+    <ng-container *ngIf="activeView === 'shop'">
+    <section class="shop-intro">
+      <h2 class="section-title">Meow! Welcome to our Cat Shop</h2>
+      <p class="section-subtitle">Find the purrfect items for your cat and feline friends</p>
+    </section>
+
+    <div class="shop-layout">
+      <section class="products-grid" aria-label="Products">
+        <article class="product-card" *ngFor="let p of products">
+          <div class="product-image">
+            <span class="product-emoji" aria-hidden="true">{{ p.emoji }}</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ p.name }}</h3>
+            <p class="product-desc">{{ p.description }}</p>
+            <span class="product-price">{{ formatPeso(p.price) }}</span>
+            <button type="button" class="add-cart-btn" (click)="addToCart(p)">Add to Cart</button>
+          </div>
+        </article>
+      </section>
+
+      <aside class="cart-panel" aria-label="Shopping cart">
+        <h2 class="cart-panel-title">Your cart</h2>
+        <p class="cart-panel-empty" *ngIf="!cartLines.length">Your cart is empty. Add items from the shop.</p>
+
+        <ul class="cart-lines" *ngIf="cartLines.length">
+          <li class="cart-line" *ngFor="let line of cartLines">
+            <div class="cart-line-info">
+              <span class="cart-line-name">{{ line.name }}</span>
+              <span class="cart-line-unit">{{ formatPeso(line.unitPrice) }} each</span>
+            </div>
+            <div class="cart-line-controls">
+              <button type="button" class="qty-btn" (click)="decrement(line)" aria-label="Decrease quantity">
+                −
+              </button>
+              <span class="qty-value">{{ line.quantity }}</span>
+              <button type="button" class="qty-btn" (click)="increment(line)" aria-label="Increase quantity">
+                +
+              </button>
+              <button type="button" class="remove-btn" (click)="removeLine(line)">Remove</button>
+            </div>
+            <div class="cart-line-sub">{{ formatPeso(line.unitPrice * line.quantity) }}</div>
+          </li>
+        </ul>
+
+        <div class="cart-footer" *ngIf="cartLines.length">
+          <div class="cart-total-row">
+            <span>Total</span>
+            <strong>{{ formatPeso(cartTotal) }}</strong>
+          </div>
+          <button type="button" class="checkout-btn" (click)="placeOrder()">Place order</button>
+          <button type="button" class="clear-cart-btn" (click)="clearCart()">Clear cart</button>
+        </div>
+
+        <p class="checkout-notice" *ngIf="checkoutNotice">{{ checkoutNotice }}</p>
+      </aside>
+    </div>
+    </ng-container>
+  </main>
+</div>

@@ -1,0 +1,167 @@
+<div class="body">
+  <div class="login-card">
+    <div class="logo-row">
+      <div class="logo-badge">
+        <img src="/cat.png" alt="App logo" class="logo-image" />
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Cat Shop</span>
+        <span class="logo-tagline">Create your account</span>
+      </div>
+    </div>
+
+    <h1 class="title">Register</h1>
+    <p class="subtitle">
+      {{ editingOriginalEmail ? 'Update the account below, then save.' : 'Sign up to start shopping.' }}
+    </p>
+
+    <form (ngSubmit)="submit()" #registerForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Choose a username"
+          class="text-input"
+          [(ngModel)]="username"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          class="text-input"
+          [(ngModel)]="email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Create a password"
+          class="text-input"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select
+          id="role"
+          name="role"
+          class="text-input role-select"
+          [(ngModel)]="role"
+          required
+        >
+          <option value="Student">Student</option>
+          <option value="Instructor">Instructor</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="primary-button" type="submit" [disabled]="registerForm.invalid">
+          {{ editingOriginalEmail ? 'Save changes' : 'Create account' }}
+        </button>
+        <button
+          *ngIf="editingOriginalEmail"
+          type="button"
+          class="secondary-button"
+          (click)="cancelEdit()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+
+    <p class="auth-footer">
+      <span>Already have an account?</span>
+      <button type="button" class="link-button" (click)="backToLogin()">Back to login</button>
+    </p>
+
+    <div class="users-table-wrap">
+      <h2 class="users-section-title">Registered users</h2>
+      <p class="users-section-hint" *ngIf="!users.length">No users yet. Create an account above.</p>
+
+      <ng-container *ngIf="users.length">
+        <div class="table-toolbar">
+          <label class="table-search-label" for="table-search">Search users</label>
+          <div class="table-toolbar-row">
+            <input
+              id="table-search"
+              type="search"
+              class="table-search-input"
+              placeholder="Search by username, email, or role"
+              [(ngModel)]="tableSearch"
+              [ngModelOptions]="{ standalone: true }"
+              name="tableSearch"
+              autocomplete="off"
+            />
+            <button
+              type="button"
+              class="table-search-icon-btn"
+              aria-label="Search"
+              (click)="onTableSearchIconClick()"
+            >
+              <svg
+                class="table-search-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of filteredUsers">
+              <td>{{ u.username }}</td>
+              <td>{{ u.email }}</td>
+              <td>{{ u.role }}</td>
+              <td class="col-actions">
+                <button type="button" class="table-btn edit" (click)="startEdit(u)">Edit</button>
+                <button type="button" class="table-btn delete" (click)="deleteUser(u)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="table-empty-hint" *ngIf="!filteredUsers.length && tableSearch.trim()">
+          No users match “{{ tableSearch.trim() }}”.
+        </p>
+      </ng-container>
+    </div>
+
+    <p class="result error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+    <p class="result success" *ngIf="successMessage">
+      {{ successMessage }}
+    </p>
+  </div>
+</div>
