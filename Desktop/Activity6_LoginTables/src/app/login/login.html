@@ -1,0 +1,159 @@
+<div class="body">
+  <div class="login-section">
+    <div class="login-card">
+      <div class="logo-row">
+        <div class="logo-badge">
+          <img src="/cat.png" alt="App logo" class="logo-image" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Login Portal</span>
+          <span class="logo-tagline">Secure access area</span>
+        </div>
+      </div>
+
+      <div class="form-toggle">
+        <button type="button" class="toggle-button" [class.active]="isLoginForm" (click)="switchForm()">Login</button>
+        <button type="button" class="toggle-button" [class.active]="!isLoginForm" (click)="switchForm()">Register</button>
+      </div>
+
+      <div *ngIf="isLoginForm">
+        <h1 class="title">Welcome back</h1>
+        <p class="subtitle">Use your account credentials to sign in.</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              placeholder="Enter your username"
+              class="text-input"
+              formControlName="username"
+            />
+            <div class="error" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+              Username is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              class="text-input"
+              formControlName="email"
+            />
+            <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">Must be a valid email.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              class="text-input"
+              formControlName="password"
+            />
+            <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Minimum 5 characters.</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['maxlength']">Maximum 8 characters.</div>
+            </div>
+          </div>
+
+          <button class="primary-button" type="submit">Sign In</button>
+        </form>
+
+        <p class="result" *ngIf="loginMessage" [class.error]="loginMessage.includes('Invalid')">{{ loginMessage }}</p>
+      </div>
+
+      <div *ngIf="!isLoginForm">
+        <h1 class="title">Register</h1>
+        <p class="subtitle">Create a new account.</p>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+          <div class="form-group">
+            <label for="regEmail">Email</label>
+            <input
+              id="regEmail"
+              type="email"
+              placeholder="Enter your email"
+              class="text-input"
+              formControlName="regEmail"
+            />
+            <div class="error" *ngIf="registerForm.get('regEmail')?.invalid && registerForm.get('regEmail')?.touched">
+              <div *ngIf="registerForm.get('regEmail')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="registerForm.get('regEmail')?.errors?.['email']">Must be a valid email.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="usernameReg">Username</label>
+            <input
+              id="usernameReg"
+              type="text"
+              placeholder="Enter your username"
+              class="text-input"
+              formControlName="usernameReg"
+            />
+            <div class="error" *ngIf="registerForm.get('usernameReg')?.invalid && registerForm.get('usernameReg')?.touched">
+              Username is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input
+              id="regPassword"
+              type="password"
+              placeholder="••••••••"
+              class="text-input"
+              formControlName="regPassword"
+            />
+            <div class="error" *ngIf="registerForm.get('regPassword')?.invalid && registerForm.get('regPassword')?.touched">
+              <div *ngIf="registerForm.get('regPassword')?.errors?.['required']">Password is required.</div>
+              <div *ngIf="registerForm.get('regPassword')?.errors?.['minlength']">Minimum 5 characters.</div>
+              <div *ngIf="registerForm.get('regPassword')?.errors?.['maxlength']">Maximum 8 characters.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" value="Student" formControlName="role" /> Student
+              </label>
+              <label>
+                <input type="radio" value="Instructor" formControlName="role" /> Instructor
+              </label>
+            </div>
+          </div>
+
+          <button class="primary-button" type="submit">Register</button>
+        </form>
+
+        <p class="result" *ngIf="registerMessage" [class.error]="!registerMessage.includes('successful')">{{ registerMessage }}</p>
+
+        <table *ngIf="newuserList.length > 0" class="users-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of newuserList">
+              <td>{{ user.email }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.role }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="branding-section">
+    <img src="/Whisker%20Wonderland.png" alt="Whisker Wonderland Branding" class="branding-image" />
+  </div>
+</div>
