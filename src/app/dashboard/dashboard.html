@@ -9,7 +9,19 @@
         <p class="dashboard-greeting">Everything for your furry friend</p>
       </div>
     </div>
-    <button class="logout-btn" (click)="logout()">Log out</button>
+    <div class="header-actions">
+      <button
+        class="portfolio-btn"
+        type="button"
+        (click)="openPortfolio()"
+        aria-label="View portfolio"
+        title="View portfolio"
+      >
+        <span class="portfolio-icon" aria-hidden="true">👤</span>
+        <span>Portfolio</span>
+      </button>
+      <button class="logout-btn" (click)="logout()">Log out</button>
+    </div>
   </header>
 
   <main class="dashboard-main">

@@ -1,0 +1,86 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.portfolio-main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  border: 4px solid;
+  border-image: linear-gradient(to right, pink, violet) 1;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  border: 1px solid #e879f9;
+  background: #fff;
+  color: #9f1239;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.container h1 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+
+.container img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.info {
+  font-size: 1.2rem;
+  color: #242424;
+  margin-bottom: 0.75rem;
+}
+
+.info strong {
+  color: #b00c5b;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .container h1 {
+    font-size: 1.25rem;
+    margin-top: 24px;
+  }
+
+  .info {
+    font-size: 1rem;
+  }
+
+  .container img {
+    width: 150px;
+    height: 150px;
+  }
+}
